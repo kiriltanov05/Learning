@@ -65,24 +65,28 @@
                 }
                 DateTime time = DateTime.Now;
 
-                while((DateTime.Now - time).Milliseconds < frameDelayMilli)
+                while((DateTime.Now - time).TotalMilliseconds < frameDelayMilli)
                 {
-                    ConsoleKey key = Console.ReadKey().Key;
-
-                    switch (key)
+                    if (Console.KeyAvailable)
                     {
-                        case ConsoleKey.LeftArrow:
-                            movementDirection = Direction.Left;
-                            break;
-                        case ConsoleKey.RightArrow:
-                            movementDirection = Direction.Right;
-                            break;
-                        case ConsoleKey.UpArrow:
-                            movementDirection = Direction.Up;
-                            break;
-                        case ConsoleKey.DownArrow:
-                            movementDirection = Direction.Down;
-                            break;
+                        ConsoleKey key = Console.ReadKey(true).Key;
+
+                        switch (key)
+                        {
+                            case ConsoleKey.LeftArrow:
+                                if (movementDirection != Direction.Right)
+                                    movementDirection = Direction.Left;
+                                break;
+                            case ConsoleKey.RightArrow:
+                                movementDirection = Direction.Right;
+                                break;
+                            case ConsoleKey.UpArrow:
+                                movementDirection = Direction.Up;
+                                break;
+                            case ConsoleKey.DownArrow:
+                                movementDirection = Direction.Down;
+                                break;
+                        }
                     }
                     
                 }

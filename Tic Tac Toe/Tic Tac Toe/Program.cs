@@ -1,6 +1,7 @@
 ﻿string[] grid = new string[9] { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 bool isPlayer1Turn = true;
 int numTurns = 0;
+bool winner = false;
 
 while (!CheckVictory() && numTurns!=9)
 {
@@ -26,13 +27,15 @@ while (!CheckVictory() && numTurns!=9)
 
         numTurns++;
     }
-
+    winner = isPlayer1Turn;
     isPlayer1Turn = !isPlayer1Turn;
 
 }
 
-if (CheckVictory())
-    Console.WriteLine("Victory!");
+if (CheckVictory() && winner==true)
+    Console.WriteLine("Victory! Player 1 won!");
+else if (CheckVictory() && winner == false)
+    Console.WriteLine("Victory! Player 2 won!");
 else
     Console.WriteLine("Tie!");
 
